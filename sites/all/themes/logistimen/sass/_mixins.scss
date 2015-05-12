@@ -1,0 +1,72 @@
+// @file
+// Custom sass mixins
+//
+// Define the custom mixins for your project here.
+// http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#defining_a_mixin
+
+// Makes an element visually hidden, but accessible.
+// @see http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+@mixin element-invisible {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
+    clip: rect(1px 1px 1px 1px); // IE6 and IE7 use the wrong syntax.
+  }
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+// Turns off the element-invisible effect.
+@mixin element-invisible-off {
+  position: static !important;
+  clip: auto;
+  height: auto;
+  width: auto;
+  overflow: auto;
+}
+
+// Makes an element visually hidden by default, but visible when focused.
+@mixin element-focusable {
+  @include element-invisible;
+
+  &:active,
+  &:focus {
+    @include element-invisible-off;
+  }
+}
+
+@mixin width(){
+  width: 1340px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 3%;
+  box-sizing: border-box;
+}
+
+@mixin button(){
+        border: 1px solid $green;
+      height: 33px;
+      overflow: hidden;
+      margin: 10px auto 0;
+      width: 140px;
+      transition: all 1s ;
+      -webkit-transition: all 1s;
+      background: url("../images/left-arrow-green.png") no-repeat center -30px; 
+      &:hover{
+          background: url("../images/left-arrow-green.png") no-repeat center center; 
+      }
+      a.link{
+        color: $green;
+        display: block;
+        font-size: 1em;
+        padding: 5px 30px;
+        text-align: center;
+        width: 80px;
+        transition: all 1s ;
+        -webkit-transition: all 1s;
+        &:hover{
+          padding-top: 30px;
+        }
+      }
+}
